@@ -1,7 +1,6 @@
 <?php
-use App\Http\Controllers\filmsController;
+use App\Http\Controllers\MoviesManagementController;
 use App\Http\Controllers\MoviesController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,7 +17,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/films', [filmsController::class,'index'] );
 Route::get('/movies', [MoviesController::class, 'index'])->name('movies.index');
 Route::get('/movies/{id}', [MoviesController::class, 'show'])->name('movies.show');
 
@@ -29,7 +27,5 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified'
 ])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    Route::get('/bo/movies', [MoviesManagementController::class, 'index'])->name('movies.management.index');
 });
