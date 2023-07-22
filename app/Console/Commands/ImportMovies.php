@@ -29,6 +29,8 @@ class ImportMovies extends Command
 
         $moviesService->importMoviesPerTrend('day');
         $moviesService->importMoviesPerTrend('week');
+
+        echo "Movies imported successfully\n";
         
     }
 }
