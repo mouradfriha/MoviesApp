@@ -51,4 +51,4 @@ Afin de remplir la base de données avec les films en vedette (trends), lancer l
 
 `php artisan import:movies`
 
-9- Consulter l'application sur votre navigateur via l'url http://localhost/movies
+9- Consulter l'application sur votre navigateur via l'url http://localhost
