@@ -122,9 +122,8 @@ class MoviesManagementController extends Controller
     public function destroy(Film $movie)
     {
         $movie->delete();
-
-        // Rediriger vers la page de liste des films après la suppression
-        //echo('test');
+        
+        // Rediriger vers la page de liste des films après la suppression        
         return redirect()->route('bo.movies.store')->with('success', 'Movie deleted successfully!');
     }
 }

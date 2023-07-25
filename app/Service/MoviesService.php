@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Http;
 
 use App\Models\Film;
 
+
 class MoviesService {
 
     const TRENDING_FIELDS_MAP = [
@@ -12,18 +13,22 @@ class MoviesService {
         'week' => 'trending_in_week'
     ];
 
-    //importer les movier de l API
+
     public function importMoviesPerTrend($trend) {
-        $apiBaseUrl = env('TMDB_API_BASE_URL');        
+        $apiBaseUrl = env('TMDB_API_BASE_URL');
         try {
             $result = Http::withHeaders([
                 'Authorization' => "Bearer " . env("TMDB_API_TOKEN")
-            ])->get("{$apiBaseUrl}trending/all/{$trend}");
+            ])->get("{$apiBaseUrl}/trending/all/{$trend}");
             
 
             $movies = json_decode($result->body(), true)['results'];
 
             foreach ($movies as $movie) {
+                //$movieId = $movie['id'];
+
+                // Utiliser le scope pour rechercher un film existant par son ID
+                // $existingMovie = Film::existingMovie($movieId);
                 $existingMovie = Film::where('film_id', '=', $movie['id'])->first();
                 if (!$existingMovie) {
                     $newMovie = $this->createMovie($movie);

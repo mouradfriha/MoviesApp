@@ -11,31 +11,6 @@
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-        <script>
-            // Attachez un gestionnaire d'événement pour le formulaire de suppression
-            document.addEventListener('submit', function (event) {
-                if (event.target.matches('.delete-form')) {
-                    event.preventDefault();
-    
-                    // Demander confirmation à l'utilisateur avant la suppression
-                    const confirmMessage = event.target.getAttribute('data-confirm');
-                    Swal.fire({
-                        title: 'Confirmation',
-                        text: confirmMessage,
-                        icon: 'warning',
-                        showCancelButton: true,
-                        confirmButtonColor: '#3085d6',
-                        cancelButtonColor: '#d33',
-                        confirmButtonText: 'Yes, delete it!'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            // Soumettre le formulaire de suppression s'il a confirmé
-                            event.target.submit();
-                        }
-                    });
-                }
-            });
-        </script>
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
