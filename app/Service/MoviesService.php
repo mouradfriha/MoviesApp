@@ -12,13 +12,13 @@ class MoviesService {
         'week' => 'trending_in_week'
     ];
 
-
+    //importer les movier de l API
     public function importMoviesPerTrend($trend) {
-
+        $apiBaseUrl = env('TMDB_API_BASE_URL');        
         try {
             $result = Http::withHeaders([
                 'Authorization' => "Bearer " . env("TMDB_API_TOKEN")
-            ])->get("https://api.themoviedb.org/3/trending/all/{$trend}");
+            ])->get("{$apiBaseUrl}trending/all/{$trend}");
             
 
             $movies = json_decode($result->body(), true)['results'];

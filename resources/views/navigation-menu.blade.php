@@ -7,6 +7,7 @@
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('movies.management.index') }}">
                         <x-application-mark class="block h-9 w-auto" />
+                        
                     </a>
                 </div>
 
@@ -21,7 +22,12 @@
             <div class="hidden sm:flex sm:items-center sm:ml-6">
                 <!-- Teams Dropdown -->
                 @if (Laravel\Jetstream\Jetstream::hasTeamFeatures())
-                <a href="{{route('movies.index')}}">  accueil </a>
+                    <div class="ml-3 relative">
+                         <a href="{{route('bo.movies.create')}}">  Ajout un film </a>
+                    </div>
+                    <div class="ml-3 relative">
+                         <a href="{{route('movies.index')}}">  accueil </a>
+                    </div>
                 @endif
 
                 <!-- Settings Dropdown -->
