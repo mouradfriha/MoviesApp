@@ -27,10 +27,10 @@
             </div>
 
 
-            <div class="mb-4">
+            {{-- <div class="mb-4">
                 <label for="film_id" class="block font-semibold mb-1">Film ID</label>
                 <input type="text" name="film_id" id="film_id" class="form-input w-full" value="{{ $movie->film_id }}" required>
-            </div>
+            </div> --}}
 
             <div class="mb-4">
                 <label for="backdrop_path" class="block font-semibold mb-1">Backdrop Path</label>

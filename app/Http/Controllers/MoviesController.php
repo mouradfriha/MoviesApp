@@ -1,9 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Http\Requests\MovieRequest;
 use Illuminate\Http\Request;
 use App\Models\Film;
+use App\Models\Movie;
 
 
 class MoviesController extends Controller
@@ -18,6 +19,9 @@ class MoviesController extends Controller
 
         return view('movies.index', compact('trend', 'trendingMovies'));
     }
+
+
+
 
     public function show($id)
     {

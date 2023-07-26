@@ -27,10 +27,9 @@ class Film extends Model
     }
 
     //teste si le film existe
-    /*
     public function scopeExistingMovie($query, $movieId)
     {
         return $query->where('film_id', '=', $movieId)->first();
-    }*/
+    }
 
 }
