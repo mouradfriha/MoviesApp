@@ -14,7 +14,8 @@ class MoviesService {
     ];
 
     
-    public function importMoviesPerTrend($trend) {
+    public function importMoviesPerTrend(string $trend): void
+    {
         $apiBaseUrl = env('TMDB_API_BASE_URL');
         try {
             $result = Http::withHeaders([
@@ -46,7 +47,8 @@ class MoviesService {
         }
     }
 
-    private function createMovie($movie) {
+    private function createMovie(array $movie): Film
+    {
         $newMovie = new Film();
         $newMovie->film_id = $movie['id'];
         $newMovie->adult = $movie['adult'];

@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Collection;
 
 class Film extends Model
 {
@@ -15,7 +17,7 @@ class Film extends Model
     ];
 
     // scope pour verifie le tendance day/week
-    public function scopeTrending($query, $trend)
+    public function scopeTrending(Builder $query, string $trend): Collection
     {
         // Vérifiez si la clé existe dans le tableau des champs tendances
         if (array_key_exists($trend, self::TRENDING_FIELDS_MAP)) {
@@ -27,7 +29,7 @@ class Film extends Model
     }
 
     //teste si le film existe
-    public function scopeExistingMovie($query, $movieId)
+    public function scopeExistingMovie(Builder $query, int $movieId): ?Film
     {
         return $query->where('film_id', '=', $movieId)->first();
     }
