@@ -34,4 +34,15 @@ class Film extends Model
         return $query->where('film_id', '=', $movieId)->first();
     }
 
+    public function scopeSearch($query, $searchTerm)
+    {
+        // Appliquez la recherche si un terme de recherche est fourni
+        if ($searchTerm) {
+            return $query->where('title', 'like', '%' . $searchTerm . '%');
+        } else {
+            // Si aucun terme de recherche n'est fourni, retournez tous les films
+            return $query;
+        }
+    }
+
 }

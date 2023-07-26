@@ -14,10 +14,14 @@ class MoviesManagementController extends Controller
 {
     
 
-    public function index(): View
-     {
-        $movies = Film::paginate(10);
-        return view('bo/movies', compact('movies'));
+    public function index(Request $request): View
+    {
+        $searchTerm = $request->input('search');
+
+        // Utilisez la portée de recherche définie dans le modèle Film
+        $movies = Film::search($searchTerm)->paginate(10);
+
+        return view('bo.movies', compact('movies'));
     }
 
     //Créer un nouvel  Film 
