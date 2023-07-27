@@ -106,7 +106,7 @@ class MoviesManagementController extends Controller
     return redirect()->route('bo.movies.store')->with('success', 'Movie updated successfully!');
 }
 
-    // la fonctin pour supprime un film
+    // la fonction pour supprime un film
     public function destroy(Film $movie): RedirectResponse
     {
         $movie->delete();
