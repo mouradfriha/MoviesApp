@@ -10,12 +10,13 @@ return new class extends Migration
      * Run the migrations.
      */
     public function up(): void
-    {
+    {   Schema::disableForeignKeyConstraints();
         Schema::create('films', function (Blueprint $table) {
+            
             $table->id();
             $table->boolean('adult');
             $table->string("backdrop_path");
-            $table->bigInteger("film_id");
+            $table->bigInteger("film_id")->index(); 
             $table->string("title");
             $table->string("original_language");
             $table->string("original_title");
@@ -27,10 +28,9 @@ return new class extends Migration
             $table->float('vote_average');
             $table->integer('vote_count');
             $table->boolean('trending_today')->default(false);
-            $table->boolean('trending_in_week')->default(false);
-
-            
+            $table->boolean('trending_in_week')->default(false); 
             $table->timestamps();
+            
         });
     }
 
@@ -40,5 +40,6 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('films');
+        
     }
 };

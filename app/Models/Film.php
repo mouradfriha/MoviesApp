@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\genres;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
@@ -43,6 +44,11 @@ class Film extends Model
             // Si aucun terme de recherche n'est fourni, retournez tous les films
             return $query;
         }
+    }
+    // relation entre table genre  et film avec la table pivot film_genre
+    public function genres()
+    {
+        return $this->belongsToMany(genres::class, 'film_genre');
     }
 
 }

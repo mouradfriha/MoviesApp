@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Service\GenresService;
 use App\Service\MoviesService;
 use Illuminate\Console\Command;
 
@@ -24,13 +25,21 @@ class ImportMovies extends Command
     /**
      * Execute the console command.
      */
-    public function handle(MoviesService $moviesService)
+    public function handle(MoviesService $moviesService, GenresService $genresService)
     {
 
         $moviesService->importMoviesPerTrend('day');
         $moviesService->importMoviesPerTrend('week');
-
+        $genresService->importGenres();
+        echo "detail imported successfully\n";
         echo "Movies imported successfully\n";
         
     }
+
+   /* public function handle(GenresService $genresService)
+    {        
+        $genresService->importGenres();
+        echo "detail imported successfully\n";
+        
+    }*/
 }
