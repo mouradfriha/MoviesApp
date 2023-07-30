@@ -32,9 +32,9 @@ class Film extends Model
     //teste si le film existe
     public function scopeExistingMovie(Builder $query, int $movieId): ?Film
     {
-        return $query->where('id', '=', $movieId)->first();
+        return $query->where('id', $movieId)->first();
     }
-
+    // fonction pour cherche un film ds la liste des films
     public function scopeSearch($query, $searchTerm)
     {
         // Appliquez la recherche si un terme de recherche est fourni
@@ -54,6 +54,16 @@ class Film extends Model
     {
         return $this->belongsToMany(Genre::class, 'film_genre');
         ///return $this->belongsToMany(genres::class, 'film_genre')->onDelete('cascade');
+        
+    }
+
+    /**
+     * Summary of getMovieGenresAttribute
+     * @return mixed
+     */
+    public function getMovieGenresAttribute()
+    {
+        return $this->genres->pluck('id')->toArray();
     }
 
 }

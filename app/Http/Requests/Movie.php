@@ -21,10 +21,8 @@ class Movie extends FormRequest
      */
     public function rules(): array
     {
-        return [
-          
-
-            'film_id' => 'required|integer',
+        return [     
+            //'id' => 'required|integer',
             'adult' => 'boolean',
             'backdrop_path' => 'required|string',
             'title' => 'required|string|max:255',

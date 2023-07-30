@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Genre;
 use Illuminate\Console\View\Components\Alert;
 use Illuminate\Http\Request;
 use App\Models\Film;
@@ -34,7 +35,7 @@ class MoviesManagementController extends Controller
         // Les données ont déjà été validées grâce à la classe MovieRequest
         // Vous pouvez accéder aux données validées via l'objet $request
         $data = $request->validated();
-    
+
         // Vérifier si le champ 'adult' 'video' 'trending' est présent dans la requête
         // Si oui, utilisez true, sinon, utilisez false
         $adult = $request->filled('adult') ? true : false;
@@ -59,8 +60,7 @@ class MoviesManagementController extends Controller
         $newMovie->trending_today = $trending_today;
         $newMovie->trending_in_week = $trending_in_week;
     
-        $newMovie->save();
-    
+        $newMovie->save();    
         // Rediriger vers la page de liste des films après l'ajout
         return redirect()->route('bo.movies.store')->with('success', 'Movie added successfully!');
     }
@@ -68,7 +68,11 @@ class MoviesManagementController extends Controller
     // fonction pour modifier les information un film
     public function edit(Film $movie): View
     {
-        return view('bo.editMovie', compact('movie'));
+        $genres = Genre::all();
+
+    // Get the genres associated with the current movie
+    $movieGenres = $movie->genres->pluck('id')->toArray();
+        return view('bo.editMovie', compact('movie','genres', 'movieGenres'));
     }    
     
     //fonction update avec la validation request
@@ -98,10 +102,13 @@ class MoviesManagementController extends Controller
     $movie->vote_average = $data['vote_average'];
     $movie->vote_count = $data['vote_count'];
     $movie->trending_today = $trending_today;
-    $movie->trending_in_week = $trending_in_week ;
-    // Mettez à jour les autres propriétés du film avec les valeurs du formulaire
+    $movie->trending_in_week = $trending_in_week ;    
 
     $movie->save();
+
+    // Sync the genres associated with the movie
+    $genres = $request->input('genres', []);
+    $movie->genres()->sync($genres);
     // Rediriger vers la page de liste des films après la modification
     return redirect()->route('bo.movies.store')->with('success', 'Movie updated successfully!');
 }

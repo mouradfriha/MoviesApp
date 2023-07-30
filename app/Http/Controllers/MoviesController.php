@@ -22,8 +22,6 @@ class MoviesController extends Controller
     }
 
 
-
-
     public function show(int $id): View
     {
         // Get the movie details from the database based on the $id

@@ -24,7 +24,7 @@ class MovieRequest extends FormRequest
         
         return [
             
-            //'film_id' => 'required|integer',
+            //'id' => 'required|integer',
             'adult' => 'boolean',
             'backdrop_path' => 'required|string',
             'title' => 'required|string|max:255',

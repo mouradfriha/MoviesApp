@@ -20,7 +20,7 @@ class ImportMovies extends Command
      *
      * @var string
      */
-    protected $description = 'This command imports movies from TMDB API';
+    protected $description = 'This command imports movies && details from TMDB API';
 
     /**
      * Execute the console command.
@@ -35,11 +35,5 @@ class ImportMovies extends Command
         echo "Movies imported successfully\n";
         
     }
-
-   /* public function handle(GenresService $genresService)
-    {        
-        $genresService->importGenres();
-        echo "detail imported successfully\n";
-        
-    }*/
+  
 }

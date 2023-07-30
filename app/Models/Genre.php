@@ -8,8 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Genre extends Model
 {
-
-    //relatin entre film et film avec la table pivot film_genre
+    //relatin entre film et genre avec la table pivot film_genre
     public function films()
     {
         return $this->belongsToMany(Film::class, 'film_genre')->onDelete('cascade');

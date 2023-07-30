@@ -4,23 +4,16 @@
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Ajout des films') }}
         </h2>
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{-- <a href="{{route('movies.index')}}">  accueil </a> --}}
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">           
         </h2>
+
     </x-slot>
 
-    <!-- resources/views/bo/addMovies.blade.php -->
-
-
-
-        
             <main class="container mx-auto px-4 py-8">
                 <h1 class="text-3xl font-semibold mb-4">Add New Movie</h1>
 
                 <form action="{{ route('bo.movies.store') }}" method="POST" class="max-w-md mx-auto">
                     @csrf
-
-                    
         
                     <div class="mb-4">
                         <label for="adult" class="block font-semibold mb-1">Adult</label>
@@ -30,9 +23,8 @@
                     <div class="mb-4">
                         <label for="backdrop_path" class="block font-semibold mb-1">Backdrop Path</label>
                         <input type="text" name="backdrop_path" id="backdrop_path" class="form-input w-full"  required>
-                    </div>
-        
-                    <!-- Ajoutez d'autres champs pour le formulaire -->
+                    </div>        
+                    
                     <div class="mb-4">
                         <label for="title" class="block font-semibold mb-1">Title</label>
                         <input type="text" name="title" id="title" class="form-input w-full" >
@@ -87,6 +79,5 @@
                     </div>
                 </form>
             </main>
-
 
 </x-app-layout>

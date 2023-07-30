@@ -1,11 +1,13 @@
 @component('layouts.guest')
     <div class="container mx-auto py-8">
-        <a href="{{url()->previous()}}"> Retour </a>
+        <a href="{{url()->previous()}}"> Go Back </a>
     <div class="flex flex-col">
         <!-- Movie poster -->
         <div class="h-fit overflow-hidden rounded-xl" >
             <!-- Movie poster image -->
-            <img class="bg-cover h-[450px] w-[400px] m-auto" src="https://image.tmdb.org/t/p/w500{{$movie->poster_path}}" alt="{{$movie->title}}" class="w-full">
+            <a href="https://image.tmdb.org/t/p/w500{{ $movie->poster_path }}" target="_blank">
+                <img class="bg-cover h-[450px] w-[500px] m-auto" src="https://image.tmdb.org/t/p/w500{{ $movie->poster_path }}" alt="{{ $movie->title }}" class="w-full">
+            </a>           
         </div>
 
         <!-- Movie details -->

@@ -4,40 +4,45 @@
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Ajout des films') }}
         </h2>
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{-- <a href="{{route('movies.index')}}">  accueil </a> --}}
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">        
         </h2>
     </x-slot>
-
-    <!-- resources/views/bo/editMovies.blade.php -->
+    
 
     <main class="container mx-auto px-4 py-8">
         <h1 class="text-3xl font-semibold mb-4">Edit Movie: {{ $movie->title }}</h1>
 
         <form action="{{ route('bo.movies.update', $movie->id) }}" method="POST" class="max-w-md mx-auto">
             @csrf
-            @method('PUT')
-
-            <!-- Ajoutez tous les champs du formulaire comme dans le formulaire d'ajout -->
-            
+            @method('PUT')           
 
             <div class="mb-4">
                 <label for="adult" class="block font-semibold mb-1">Adult</label>
                 <input type="checkbox" name="adult" id="adult" class="form-checkbox" value='1' @if($movie->adult) checked value='1' @endif>
             </div>
 
+            <div class="mb-4">
+                <label class="block font-semibold mb-1">Genres</label>
+                <div class="flex flex-wrap gap-4">
+                    @foreach ($genres as $genre)
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" name="genres[]" value="{{ $genre->id }}" class="form-checkbox" @if(in_array($genre->id, $movieGenres)) checked @endif>
+                            <span class="ml-2">{{ $genre->name }}</span>
+                        </label>
+                    @endforeach
+                </div>
+            </div>   
 
             {{-- <div class="mb-4">
-                <label for="film_id" class="block font-semibold mb-1">Film ID</label>
-                <input type="text" name="film_id" id="film_id" class="form-input w-full" value="{{ $movie->film_id }}" required>
+                <label for="id" class="block font-semibold mb-1">Film ID</label>
+                <input type="text" name="id" id="id" class="form-input w-full" value="{{ $movie->id }}" required>
             </div> --}}
 
             <div class="mb-4">
                 <label for="backdrop_path" class="block font-semibold mb-1">Backdrop Path</label>
                 <input type="text" name="backdrop_path" id="backdrop_path" class="form-input w-full" value="{{ $movie->backdrop_path }}" required>
             </div>
-
-            <!-- Ajoutez tous les autres champs de la table "films" ici -->
+            
             <div class="mb-4">
                 <label for="title" class="block font-semibold mb-1">Title</label>
                 <input type="text" name="title" id="title" class="form-input w-full" value="{{ $movie->title }}" required>
@@ -102,9 +107,7 @@
             </div>
            
         </form>
-    </main>
-
-        
+    </main>      
             
 
 
