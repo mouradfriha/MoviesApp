@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::disableForeignKeyConstraints();
+        //Schema::disableForeignKeyConstraints();
         Schema::create('film_genre', function (Blueprint $table) {
             
 
@@ -24,7 +24,7 @@ return new class extends Migration
             $table->index('genre_id');
 
             // Ajoutez les clés étrangères
-            $table->foreign('film_id')->references('film_id')->on('films')->onDelete('cascade');
+            $table->foreign('film_id')->references('id')->on('films')->onDelete('cascade');
             $table->foreign('genre_id')->references('id')->on('genres')->onDelete('cascade');
         
 

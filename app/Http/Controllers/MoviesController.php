@@ -28,7 +28,8 @@ class MoviesController extends Controller
     {
         // Get the movie details from the database based on the $id
         $movie = Film::findOrFail($id);
-        //dd(movie)
-        return view('movies.details', compact('movie'));
+        $genres = $movie->genres;
+        //dd($genres);
+        return view('movies.details', compact('movie','genres'));
     }
 }

@@ -1,6 +1,6 @@
 @component('layouts.guest')
     <div class="container mx-auto py-8">
-        <a href="{{url()->previous()}}"> Go back </a>
+        <a href="{{url()->previous()}}"> Retour </a>
     <div class="flex flex-col">
         <!-- Movie poster -->
         <div class="h-fit overflow-hidden rounded-xl" >
@@ -23,6 +23,16 @@
                 <p class="text-gray-600">
                     {{$movie->overview}}
                 </p>
+            </div>
+
+             <!-- Movie genres -->
+             <div class="my-8">
+                <h2 class="text-xl font-semibold">Genres</h2>
+                <ul class="list-disc list-inside">
+                    @foreach ($genres as $genre)
+                        <li>{{$genre->name}}</li>
+                    @endforeach
+                </ul>
             </div>
 
         </div>

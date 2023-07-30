@@ -1,10 +1,12 @@
 <?php
 
 namespace App\Service;
+use App\Models\FilmGenre;
+use App\Models\Genre;
 use Illuminate\Support\Facades\Http;
 
 use App\Models\Film;
-use App\Models\genres;
+
 
 
 class GenresService {
@@ -22,11 +24,11 @@ class GenresService {
     public function importGenres() {
 
         $apiBaseUrl = env('TMDB_API_BASE_URL');
-        $movieIds = Film::pluck('film_id')->toArray();
+        $movieIds = Film::pluck('id')->toArray();
         
         try {
             foreach($movieIds as $movieId){
-
+                
                 $result = Http::withHeaders([
                     'Authorization' => "Bearer " . env("TMDB_API_TOKEN")
                 ])->get("{$apiBaseUrl}/movie/{$movieId}");
@@ -34,6 +36,9 @@ class GenresService {
                 //dd($result);
                 $movies= json_decode($result->body(), true);
                 if(isset($movies['genres'])){
+
+
+                    
                     $moviesDetails = $movies['genres'] ;
                     //dd($moviesDetails);
                     foreach ($moviesDetails as $movieDetail) {
@@ -41,15 +46,21 @@ class GenresService {
         
                         // Utiliser le scope pour rechercher un genre existant par son ID
                         //$existingGenre = genres::existingGenre($movieDetail);
-                        $existingGenre = genres::where('id', '=', $movieDetail['id'])->first();
+                        $existingGenre = Genre::where('id', '=', $movieDetail['id'])->first();
                         
-                        if (!$existingGenre) {
+                        if (!$existingGenre) {                            
+                            $newGenre = $this->createGenre($movieDetail);                        ;
                             
-                            $newGenre = $this->createGenre($movieDetail);
-                        // dd($newGenre);  
                             $newGenre->save();
-                            continue;
-                        }   
+                            //continue;
+                            
+                            //continue;
+                        }  
+                        // remplir la table film_genre
+                        //dd($movieGenre,$movieId);
+                        $movieGenre = $movieDetail['id'];
+                        $newFilmGenre = $this->createFilmGenre($movieId,$movieGenre);
+                        $newFilmGenre->save(); 
                     }
                 }
 
@@ -61,10 +72,17 @@ class GenresService {
            
     }
 
-    ////
+    ////  ////cree table film_genre ////////
+    private function createFilmGenre($movieId,$movieGenre) {
+        $newFilmGenre = new FilmGenre();
+        $newFilmGenre->film_id = $movieId;
+        $newFilmGenre->genre_id = $movieGenre;
+        return $newFilmGenre;
+    }
+    ///////////////////*end*////////////
 
     private function createGenre($genre) {
-        $newGenre = new genres();
+        $newGenre = new Genre();
         $newGenre->id = $genre['id'];
         $newGenre->name = $genre['name'];
         return $newGenre;

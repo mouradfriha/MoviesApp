@@ -5,7 +5,7 @@ use App\Models\FilmGenre;
 use Illuminate\Support\Facades\Http;
 
 use App\Models\Film;
-use App\Models\genres;
+use App\Models\Genre;
 
 
 class MoviesService {
@@ -31,23 +31,14 @@ class MoviesService {
 
                 // Utiliser le scope pour rechercher un film existant par son ID
                  //$existingMovie = Film::existingMovie($movieId);
-                $existingMovie = Film::where('film_id', '=', $movie['id'])->first();
+                $existingMovie = Film::where('id', '=', $movie['id'])->first();
                 if (!$existingMovie) {
                     $newMovie = $this->createMovie($movie);
                     
                     $newMovie->{self::TRENDING_FIELDS_MAP[$trend]} = true;
 
                     
-                    // remlir la teble film_genre
-                    $movieId = $movie['id'];
-                    $movieGenres = $movie['genre_ids'];
-                    //dd($movieGenres,$movieId);
-                    foreach($movieGenres as $movieGenre) {
-                        //dd($movieGenre,$movieId);
-                        $newFilmGenre = $this->createFilmGenre($movieId,$movieGenre);
-                        $newFilmGenre->save();
-                        continue;
-                    }
+                   
 
                     $newMovie->save();
                     continue;
@@ -62,22 +53,11 @@ class MoviesService {
         }
     }
 
-    ////cree table film_genre ////////
-    private function createFilmGenre($movieId,$movieGenre) {
-        $newFilmGenre = new FilmGenre();
-        $newFilmGenre->film_id = $movieId;
-        $newFilmGenre->genre_id = $movieGenre;
-        return $newFilmGenre;
-    }
-
-
-
-
-    ///////////////////*end*////////////
+  
 
     private function createMovie($movie) {
         $newMovie = new Film();
-        $newMovie->film_id = $movie['id'];
+        $newMovie->id = $movie['id'];
         $newMovie->adult = $movie['adult'];
         $newMovie->backdrop_path = $movie['backdrop_path'];
         $newMovie->title = $movie['title'] ?? 'no title';

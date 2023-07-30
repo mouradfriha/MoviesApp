@@ -43,7 +43,7 @@ class MoviesManagementController extends Controller
         $trending_in_week = $request->filled('trending_in_week') ? true : false;
         // Créez un nouvel objet Film en utilisant les données validées
         $newMovie = new Film();
-        $newMovie->film_id = 100; // Remplacez cette valeur par la valeur que vous souhaitez
+        //$newMovie->film_id = 100; // Remplacez cette valeur par la valeur que vous souhaitez
         $newMovie->adult = $adult;
         $newMovie->backdrop_path = $data['backdrop_path'];
         $newMovie->title = $data['title'];

@@ -47,7 +47,7 @@ ou
 
 TMDB_API_TOKEN=votre_token
 
-Afin de remplir la base de données avec les films en vedette (trends), lancer la commande suivante:
+Afin de remplir la base de données avec les films en vedette (trends) et les details des films, lancer la commande suivante:
 
 `php artisan import:movies`
 

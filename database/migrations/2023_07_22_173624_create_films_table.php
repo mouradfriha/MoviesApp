@@ -10,13 +10,13 @@ return new class extends Migration
      * Run the migrations.
      */
     public function up(): void
-    {   Schema::disableForeignKeyConstraints();
+    {   //Schema::disableForeignKeyConstraints();
         Schema::create('films', function (Blueprint $table) {
             
             $table->id();
             $table->boolean('adult');
             $table->string("backdrop_path");
-            $table->bigInteger("film_id")->index(); 
+            //$table->bigInteger("film_id")->index(); 
             $table->string("title");
             $table->string("original_language");
             $table->string("original_title");

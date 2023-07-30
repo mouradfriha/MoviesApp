@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Models\genres;
+use App\Models\Genre;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
@@ -32,7 +32,7 @@ class Film extends Model
     //teste si le film existe
     public function scopeExistingMovie(Builder $query, int $movieId): ?Film
     {
-        return $query->where('film_id', '=', $movieId)->first();
+        return $query->where('id', '=', $movieId)->first();
     }
 
     public function scopeSearch($query, $searchTerm)
@@ -46,9 +46,14 @@ class Film extends Model
         }
     }
     // relation entre table genre  et film avec la table pivot film_genre
+    /**
+     * Summary of genres
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function genres()
     {
-        return $this->belongsToMany(genres::class, 'film_genre');
+        return $this->belongsToMany(Genre::class, 'film_genre');
+        ///return $this->belongsToMany(genres::class, 'film_genre')->onDelete('cascade');
     }
 
 }

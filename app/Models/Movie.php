@@ -11,7 +11,7 @@ class Film extends Model
 
     // Liste des propriétés correspondant aux colonnes de la table films
     protected $fillable = [
-        'film_id',
+        'id',
         'adult',
         'backdrop_path',
         'title',
