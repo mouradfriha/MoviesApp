@@ -35,7 +35,7 @@ class Film extends Model
         return $query->where('id', $movieId)->first();
     }
     // fonction pour cherche un film ds la liste des films
-    public function scopeSearch($query, $searchTerm)
+   /* public function scopeSearch($query, $searchTerm)
     {
         // Appliquez la recherche si un terme de recherche est fourni
         if ($searchTerm) {
@@ -44,7 +44,7 @@ class Film extends Model
             // Si aucun terme de recherche n'est fourni, retournez tous les films
             return $query;
         }
-    }
+    }*/
     // relation entre table genre  et film avec la table pivot film_genre
     /**
      * Summary of genres

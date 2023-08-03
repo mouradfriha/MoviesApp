@@ -25,8 +25,9 @@ class MoviesService {
             $movies = json_decode($result->body(), true)['results'];
             //    dd($movies);
             foreach ($movies as $movie) {  
-                              
-                $existingMovie = Film::where('id', '=', $movie['id'])->first();
+                /// utilisation de scoop existin movie
+                $existingMovie = Film::existingMovie($movie['id'])->first();             
+                //$existingMovie = Film::where('id', '=', $movie['id'])->first();
                 if (!$existingMovie) {
                     //$movie = $movie->validated();
                     $newMovie = $this->createMovie($movie);                    

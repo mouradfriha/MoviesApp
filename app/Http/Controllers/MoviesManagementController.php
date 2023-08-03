@@ -13,16 +13,16 @@ use Illuminate\View\View;
 
 class MoviesManagementController extends Controller
 {
-    
+   
 
-    public function index(Request $request): View
+    public function index(): View
     {
-        $searchTerm = $request->input('search');
+       // $searchTerm = $request->input('search');
 
         // Utilisez la portée de recherche définie dans le modèle Film
-        $movies = Film::search($searchTerm)->paginate(10);
+       // $movies = Film::search($searchTerm)->paginate(10);
 
-        return view('bo.movies', compact('movies'));
+        return view('bo.movies');
     }
 
     //Créer un nouvel  Film 
@@ -70,8 +70,8 @@ class MoviesManagementController extends Controller
     {
         $genres = Genre::all();
 
-    // Get the genres associated with the current movie
-    $movieGenres = $movie->genres->pluck('id')->toArray();
+        // Get the genres associated with the current movie
+        $movieGenres = $movie->genres->pluck('id')->toArray();
         return view('bo.editMovie', compact('movie','genres', 'movieGenres'));
     }    
     
