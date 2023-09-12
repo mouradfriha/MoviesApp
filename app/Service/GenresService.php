@@ -19,6 +19,7 @@ class GenresService {
                 $movies= json_decode($result->body(), true);
                 if(isset($movies['genres'])){                  
                     $moviesDetails = $movies['genres'] ;
+                    foreach ($moviesDetails as $movieDetail) {
                         // Utiliser le scope pour rechercher un genre existant par son ID
                        // $existingGenre = genre::existingGenre($movieDetail);
                         $existingGenre = Genre::where('id', '=', $movieDetail['id'])->first();
