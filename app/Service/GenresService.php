@@ -16,27 +16,21 @@ class GenresService {
                 $result = Http::withHeaders([
                     'Authorization' => "Bearer " . env("TMDB_API_TOKEN")
                 ])->get("{$apiBaseUrl}/movie/{$movieId}");                
-                //dd($result);
                 $movies= json_decode($result->body(), true);
-                //dd($movies);
                 if(isset($movies['genres'])){                  
                     $moviesDetails = $movies['genres'] ;
-                    //dd($moviesDetails);
-                    foreach ($moviesDetails as $movieDetail) {
-                    // $movieId = $movie['id'];        
                         // Utiliser le scope pour rechercher un genre existant par son ID
-                        //$existingGenre = genres::existingGenre($movieDetail);
+                       // $existingGenre = genre::existingGenre($movieDetail);
                         $existingGenre = Genre::where('id', '=', $movieDetail['id'])->first();
                         
                         if (!$existingGenre) {                            
                             $newGenre = $this->createGenre($movieDetail); 
                             $newGenre->save(); 
-                        }  
-                        // remplir la table film_genre
-                        //dd($movieGenre,$movieId);
-                        $movieGenre = $movieDetail['id'];
-                        $newFilmGenre = $this->createFilmGenre($movieId,$movieGenre);
-                        $newFilmGenre->save(); 
+                             // remplir la table film_genre
+                            $movieGenre = $movieDetail['id'];                            
+                            $newFilmGenre = $this->createFilmGenre($movieId,$movieGenre);
+                            $newFilmGenre->save(); 
+                        }               
                     }
                 }
             }            
