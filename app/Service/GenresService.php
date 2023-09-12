@@ -27,11 +27,22 @@ class GenresService {
                         if (!$existingGenre) {                            
                             $newGenre = $this->createGenre($movieDetail); 
                             $newGenre->save(); 
-                             // remplir la table film_genre
-                            $movieGenre = $movieDetail['id'];                            
-                            $newFilmGenre = $this->createFilmGenre($movieId,$movieGenre);
+                            
+                        }        
+                        // remplir la table film_genre
+                        $genreId = $movieDetail['id'];
+                        /*                            
+                        $newFilmGenre = $this->createFilmGenre($movieId,$movieGenre);
+                        $newFilmGenre->save();     */    
+                        $existingFilmGenre = FilmGenre::where('film_id', $movieId)
+                        ->where('genre_id', $genreId)
+                        ->first();
+                    
+                        if (!$existingFilmGenre) {                            
+                            // Créez une nouvelle relation film_genre
+                            $newFilmGenre = $this->createFilmGenre($movieId, $genreId);
                             $newFilmGenre->save(); 
-                        }               
+                        } 
                     }
                 }
             }            
